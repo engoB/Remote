@@ -1,7 +1,8 @@
 {
- "mise_a_jour": "2026-09-17T13:37:55.385657+00:00",
+ "mise_a_jour": "2026-09-17T13:46:51.009414+00:00",
  "rapport": [
-  "OK    Remotive: 13 offres retenues"
+  "OK    Remotive: 13 offres retenues",
+  "ERREUR France Travail: 400 Client Error: Bad Request for url: https://entreprise.francetravail.fr/connexion/oauth2/access_token?realm=%2Fpartenaire"
  ],
  "offres": [
   {
@@ -20,7 +21,7 @@
    "publiee_le": "2026-09-16T10:10:59",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -39,7 +40,7 @@
    "publiee_le": "2026-09-16T10:10:53",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -58,7 +59,7 @@
    "publiee_le": "2026-09-11T20:16:48",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -77,7 +78,7 @@
    "publiee_le": "2026-09-11T06:49:00",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -96,7 +97,7 @@
    "publiee_le": "2026-09-08T21:47:54",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -115,7 +116,7 @@
    "publiee_le": "2026-09-07T01:10:43",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -134,7 +135,7 @@
    "publiee_le": "2026-09-04T16:53:29",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -153,7 +154,7 @@
    "publiee_le": "2026-09-02T19:59:53",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -172,7 +173,7 @@
    "publiee_le": "2026-08-27T14:36:09",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -191,7 +192,7 @@
    "publiee_le": "2026-08-26T13:10:58",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -210,7 +211,7 @@
    "publiee_le": "2026-08-25T13:57:53",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -229,7 +230,7 @@
    "publiee_le": "2026-08-20T13:30:47",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   },
   {
@@ -248,7 +249,7 @@
    "publiee_le": "2026-08-19T12:12:11",
    "cle_source": "Remotive",
    "vue_premiere_fois": "2026-09-17T13:37:55.385657+00:00",
-   "vue_derniere_fois": "2026-09-17T13:37:55.385657+00:00",
+   "vue_derniere_fois": "2026-09-17T13:46:51.009414+00:00",
    "statut": "active"
   }
  ]
