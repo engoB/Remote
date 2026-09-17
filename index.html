@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Offres en télétravail, en français</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fond: #f5f6f8; --surface: #ffffff; --encre: #1b2230; --doux: #5b6578;
+    --trait: #dde1e8; --accent: #2447b8; --frais: #1f9d6b; --tiede: #d08a16; --vieux: #9aa3b2;
+    --titre: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --texte: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --fond: #12161e; --surface: #1a1f2a; --encre: #e7eaf0; --doux: #9aa3b4;
+      --trait: #2c3342; --accent: #8aa6ff; --frais: #3fcf93; --tiede: #f0b44c; --vieux: #6b7486; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fond); color: var(--encre); font: 16px/1.5 var(--texte); }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  header { max-width: 980px; margin: 0 auto; padding: 40px 20px 16px; }
+  h1 { font: 800 clamp(2rem, 5vw, 3.2rem)/1.05 var(--titre); letter-spacing: -0.02em; margin: 0 0 10px; }
+  .etat { color: var(--doux); margin: 0; }
+
+  .filtres { position: sticky; top: 0; z-index: 2; background: var(--fond);
+    border-bottom: 1px solid var(--trait); }
+  .filtres-in { max-width: 980px; margin: 0 auto; padding: 12px 20px;
+    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+  input[type=search], select { font: inherit; color: var(--encre); background: var(--surface);
+    border: 1px solid var(--trait); border-radius: 8px; padding: 8px 10px; }
+  input[type=search] { flex: 1 1 240px; min-width: 0; }
+  label.case { display: inline-flex; gap: 6px; align-items: center; color: var(--doux); cursor: pointer; }
+  label.case input { accent-color: var(--accent); width: 17px; height: 17px; }
+
+  main { max-width: 980px; margin: 0 auto; padding: 8px 20px 60px; }
+  .compte { color: var(--doux); margin: 14px 0 6px; font-size: .95rem; }
+  ol { list-style: none; margin: 0; padding: 0; }
+  li.offre { display: grid; grid-template-columns: 5px 1fr auto; gap: 0 16px;
+    padding: 16px 0; border-bottom: 1px solid var(--trait); }
+  .age { border-radius: 3px; background: var(--vieux); }
+  .age.frais { background: var(--frais); } .age.tiede { background: var(--tiede); }
+  h2 { font: 600 1.2rem/1.3 var(--titre); margin: 0 0 4px; }
+  h2 a { text-decoration: none; }
+  h2 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--doux); font-size: .93rem; }
+  .meta strong { color: var(--encre); font-weight: 700; }
+  .desc { color: var(--doux); font-size: .93rem; margin: 6px 0 0; max-width: 70ch;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .puces { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .puce { font-size: .8rem; border: 1px solid var(--trait); border-radius: 999px; padding: 1px 9px; color: var(--doux); }
+  .puce.fort { border-color: var(--accent); color: var(--accent); }
+  .droite { text-align: right; font-size: .85rem; color: var(--doux); white-space: nowrap; }
+  .droite .jours { display: block; font: 800 1.5rem/1 var(--titre); color: var(--encre); }
+  li.cloturee h2, li.cloturee .jours { color: var(--vieux); text-decoration: line-through; }
+  .vide { padding: 40px 0; color: var(--doux); }
+  details.rapport { margin-top: 30px; color: var(--doux); font-size: .85rem; }
+  details.rapport pre { white-space: pre-wrap; overflow-x: auto; }
+  @media (max-width: 600px) {
+    li.offre { grid-template-columns: 5px 1fr; }
+    .droite { grid-column: 2; text-align: left; margin-top: 8px; }
+    .droite .jours { display: inline; font-size: 1rem; margin-right: 6px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Offres en télétravail, en français</h1>
+  <p class="etat" id="etat">Chargement des offres…</p>
+</header>
+
+<div class="filtres">
+  <div class="filtres-in">
+    <input type="search" id="q" placeholder="Métier, entreprise, compétence…" aria-label="Rechercher">
+    <select id="source" aria-label="Source"><option value="">Toutes les sources</option></select>
+    <select id="zone" aria-label="Zone">
+      <option value="">Toutes les zones</option>
+      <option value="francophone">Pays francophones</option>
+      <option value="europe_monde">Europe ou monde</option>
+    </select>
+    <label class="case"><input type="checkbox" id="fr"> Annonce en français</label>
+    <label class="case"><input type="checkbox" id="total"> 100 % télétravail</label>
+    <label class="case"><input type="checkbox" id="closes"> Afficher les clôturées</label>
+  </div>
+</div>
+
+<main>
+  <p class="compte" id="compte" aria-live="polite"></p>
+  <ol id="liste"></ol>
+  <details class="rapport"><summary>Détail de la dernière collecte</summary><pre id="rapport"></pre></details>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const JOUR = 86400000;
+let offres = [];
+
+const jours = (iso) => iso ? Math.max(0, Math.floor((Date.now() - new Date(iso)) / JOUR)) : null;
+const echap = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const sansAccent = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const lienSur = (u) => /^https?:\/\//i.test(u) ? u : "#";
+
+function rendu() {
+  const q = sansAccent($("q").value.trim());
+  const filtre = offres.filter((o) =>
+    (o.statut === "active" || $("closes").checked) &&
+    (!$("source").value || o.source === $("source").value) &&
+    (!$("zone").value || o.zone === $("zone").value) &&
+    (!$("fr").checked || o.langue === "fr") &&
+    (!$("total").checked || o.remote_total) &&
+    (!q || sansAccent(`${o.titre} ${o.entreprise} ${o.lieu} ${o.description}`).includes(q))
+  );
+
+  const actives = filtre.filter((o) => o.statut === "active").length;
+  $("compte").textContent = `${actives} offre${actives > 1 ? "s" : ""} active${actives > 1 ? "s" : ""}` +
+    (filtre.length > actives ? `, ${filtre.length - actives} clôturée(s)` : "");
+
+  if (!filtre.length) {
+    $("liste").innerHTML = `<li class="vide">Aucune offre ne correspond. Retire un filtre ou élargis la recherche.</li>`;
+    return;
+  }
+
+  $("liste").innerHTML = filtre.slice(0, 400).map((o) => {
+    const ouverte = jours(o.vue_premiere_fois);
+    const classeAge = o.statut === "cloturee" ? "" : ouverte <= 3 ? "frais" : ouverte <= 30 ? "tiede" : "";
+    const puces = [
+      o.remote_total && `<span class="puce fort">100 % télétravail</span>`,
+      o.langue === "fr" && `<span class="puce">Annonce en français</span>`,
+      o.contrat && `<span class="puce">${echap(o.contrat)}</span>`,
+      o.statut === "cloturee" && `<span class="puce">Clôturée</span>`,
+    ].filter(Boolean).join("");
+    return `<li class="offre ${o.statut === "cloturee" ? "cloturee" : ""}">
+      <span class="age ${classeAge}" title="Suivie depuis ${ouverte} jour(s)"></span>
+      <div>
+        <h2><a href="${echap(lienSur(o.lien))}" target="_blank" rel="noopener noreferrer">${echap(o.titre)}</a></h2>
+        <div class="meta"><strong>${echap(o.entreprise)}</strong><span>${echap(o.lieu || "Lieu non précisé")}</span><span>Source : ${echap(o.source)}</span></div>
+        ${o.description ? `<p class="desc">${echap(o.description)}</p>` : ""}
+        ${puces ? `<div class="puces">${puces}</div>` : ""}
+      </div>
+      <div class="droite"><span class="jours">${ouverte} j</span>suivie depuis</div>
+    </li>`;
+  }).join("");
+}
+
+async function charger() {
+  try {
+    const r = await fetch(`data/jobs.json?v=${Date.now()}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    offres = (data.offres || []).sort((a, b) => (a.statut === "cloturee") - (b.statut === "cloturee"));
+    $("etat").textContent = data.mise_a_jour
+      ? `Dernière collecte : ${new Date(data.mise_a_jour).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" })}. Chaque titre ouvre l'offre sur le site d'origine.`
+      : "Aucune collecte pour l'instant. Lance le workflow « Mise à jour des offres » dans l'onglet Actions du dépôt.";
+    $("rapport").textContent = (data.rapport || []).join("\n") || "Rien à afficher.";
+    [...new Set(offres.map((o) => o.source))].sort().forEach((s) => $("source").add(new Option(s, s)));
+    rendu();
+  } catch (e) {
+    $("etat").textContent = `Impossible de lire data/jobs.json (${e.message}). Vérifie que le fichier existe dans le dépôt.`;
+  }
+}
+
+["q", "source", "zone", "fr", "total", "closes"].forEach((id) => $(id).addEventListener("input", rendu));
+charger();
+</script>
+</body>
+</html>
