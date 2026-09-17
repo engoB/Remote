@@ -1,0 +1,15 @@
+{
+  "_aide": "Réglages de la collecte. Modifie les valeurs puis relance le workflow.",
+  "france_travail_mots_cles": ["teletravail"],
+  "jobicy_geos": ["france", "belgium", "switzerland", "canada", "europe"],
+  "forem": {
+    "actif": true,
+    "recherche": "télétravail"
+  },
+  "evenements": {
+    "actif": true,
+    "_aide": "Copie l'URL et le scope exacts depuis la documentation de l'API « Mes évènements emploi » (icône œil sur francetravail.io) si la collecte affiche une erreur.",
+    "url": "https://api.francetravail.io/partenaire/evenements/v1/mee/evenements",
+    "scope": "api_evenementsv1 evenements"
+  }
+}

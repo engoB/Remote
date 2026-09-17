@@ -1,7 +1,19 @@
 {
-  "_aide": "Ajoute l'identifiant de chaque entreprise dans la liste de son ATS. Pour le trouver, clique sur 'Postuler' sur son site carrière : jobs.lever.co/IDENTIFIANT, boards.greenhouse.io/IDENTIFIANT (ou job-boards.greenhouse.io/IDENTIFIANT), jobs.ashbyhq.com/IDENTIFIANT, IDENTIFIANT.recruitee.com",
+  "_aide": "a_detecter : identifiants à tester automatiquement sur Lever, Greenhouse, Ashby, Recruitee, Workable et SmartRecruiters. Les résultats s'affichent dans l'onglet « Pages carrières ». Si la détection se trompe d'entreprise, retire l'identifiant d'ici et place-le dans la liste de son ATS (ex. \"lever\": [\"qonto\"]).",
+  "a_detecter": [
+    "qonto", "alan", "swile", "payfit", "pennylane", "malt", "ledger", "mirakl", "contentsquare",
+    "dataiku", "algolia", "datadog", "mistral", "aircall", "spendesk", "backmarket", "doctolib",
+    "blablacar", "agicap", "pigment", "photoroom", "sorare", "yousign", "gitguardian", "livestorm",
+    "lydia", "ornikar", "botify", "dust", "huggingface", "welcometothejungle", "deezer", "criteo",
+    "ankorstore", "360learning", "getaround", "lemlist", "brevo", "crisp", "platformsh", "clevercloud",
+    "jobteaser", "openclassrooms", "side", "shift-technology", "scaleway", "mangopay", "lucca",
+    "coveo", "lightspeedhq", "hopper", "dialogue", "workleap", "proton", "nexthink", "beekeeper",
+    "odoo", "deliverect", "collibra", "showpad", "teamleader", "lunar", "sonarsource"
+  ],
   "lever": [],
   "greenhouse": [],
   "ashby": [],
-  "recruitee": []
+  "recruitee": [],
+  "workable": [],
+  "smartrecruiters": []
 }

@@ -4,168 +4,523 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Offres en télétravail, en français</title>
+<meta name="color-scheme" content="light">
+<title>Télétravail en français</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 <style>
   :root {
-    --fond: #f5f6f8; --surface: #ffffff; --encre: #1b2230; --doux: #5b6578;
-    --trait: #dde1e8; --accent: #2447b8; --frais: #1f9d6b; --tiede: #d08a16; --vieux: #9aa3b2;
+    --fond: #f6f7f9; --surface: #ffffff; --encre: #1b2230; --doux: #5b6578; --trait: #e2e6ec;
+    --accent: #2447b8; --accent-clair: #e9eefc; --frais: #1f9d6b; --tiede: #d08a16; --vieux: #a3abb8;
+    --alerte: #b42318;
     --titre: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
     --texte: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --fond: #12161e; --surface: #1a1f2a; --encre: #e7eaf0; --doux: #9aa3b4;
-      --trait: #2c3342; --accent: #8aa6ff; --frais: #3fcf93; --tiede: #f0b44c; --vieux: #6b7486; }
-  }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--fond); color: var(--encre); font: 16px/1.5 var(--texte); }
-  a { color: inherit; }
+  a { color: var(--accent); }
+  button { font: inherit; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .conteneur { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
-  header { max-width: 980px; margin: 0 auto; padding: 40px 20px 16px; }
-  h1 { font: 800 clamp(2rem, 5vw, 3.2rem)/1.05 var(--titre); letter-spacing: -0.02em; margin: 0 0 10px; }
-  .etat { color: var(--doux); margin: 0; }
+  header { padding: 36px 0 0; background: var(--surface); border-bottom: 1px solid var(--trait); }
+  h1 { font: 800 clamp(1.9rem, 4.5vw, 2.9rem)/1.05 var(--titre); letter-spacing: -0.02em; margin: 0 0 8px; }
+  .etat { color: var(--doux); margin: 0 0 20px; }
+  nav[role=tablist] { display: flex; gap: 4px; overflow-x: auto; }
+  nav button { background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 14px;
+    color: var(--doux); cursor: pointer; white-space: nowrap; font-weight: 700; }
+  nav button[aria-selected=true] { color: var(--encre); border-bottom-color: var(--accent); }
+  nav button .nb { font-weight: 400; color: var(--doux); margin-left: 4px; }
+  section[role=tabpanel] { padding: 20px 0 60px; }
+  section[hidden] { display: none; }
+  h2.section { font: 600 1.35rem/1.2 var(--titre); margin: 8px 0 4px; }
+  .aide { color: var(--doux); margin: 0 0 18px; max-width: 70ch; }
 
-  .filtres { position: sticky; top: 0; z-index: 2; background: var(--fond);
-    border-bottom: 1px solid var(--trait); }
-  .filtres-in { max-width: 980px; margin: 0 auto; padding: 12px 20px;
-    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+  /* Filtres */
+  .filtres { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; padding: 14px;
+    background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; }
   input[type=search], select { font: inherit; color: var(--encre); background: var(--surface);
-    border: 1px solid var(--trait); border-radius: 8px; padding: 8px 10px; }
-  input[type=search] { flex: 1 1 240px; min-width: 0; }
+    border: 1px solid var(--trait); border-radius: 8px; padding: 7px 10px; }
+  input[type=search] { flex: 1 1 260px; min-width: 0; }
   label.case { display: inline-flex; gap: 6px; align-items: center; color: var(--doux); cursor: pointer; }
   label.case input { accent-color: var(--accent); width: 17px; height: 17px; }
+  .lien-bouton { background: none; border: 0; color: var(--accent); cursor: pointer; text-decoration: underline; padding: 4px; }
+  .barre-infos { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px;
+    color: var(--doux); font-size: .92rem; margin: 14px 0 4px; }
+  .legende { display: inline-flex; gap: 14px; flex-wrap: wrap; }
+  .legende span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; background: var(--c); }
 
-  main { max-width: 980px; margin: 0 auto; padding: 8px 20px 60px; }
-  .compte { color: var(--doux); margin: 14px 0 6px; font-size: .95rem; }
-  ol { list-style: none; margin: 0; padding: 0; }
-  li.offre { display: grid; grid-template-columns: 5px 1fr auto; gap: 0 16px;
-    padding: 16px 0; border-bottom: 1px solid var(--trait); }
+  /* Liste d'offres */
+  ol.liste { list-style: none; margin: 0; padding: 0; }
+  li.offre { display: grid; grid-template-columns: 5px 1fr; gap: 0 16px; padding: 16px 0; border-bottom: 1px solid var(--trait); }
   .age { border-radius: 3px; background: var(--vieux); }
   .age.frais { background: var(--frais); } .age.tiede { background: var(--tiede); }
-  h2 { font: 600 1.2rem/1.3 var(--titre); margin: 0 0 4px; }
-  h2 a { text-decoration: none; }
-  h2 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--doux); font-size: .93rem; }
-  .meta strong { color: var(--encre); font-weight: 700; }
-  .desc { color: var(--doux); font-size: .93rem; margin: 6px 0 0; max-width: 70ch;
+  h3 { font: 600 1.15rem/1.3 var(--titre); margin: 0 0 4px; }
+  h3 a { color: var(--encre); text-decoration: none; }
+  h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--doux); font-size: .93rem; }
+  .meta strong { color: var(--encre); }
+  .desc { color: var(--doux); font-size: .93rem; margin: 6px 0 0; max-width: 72ch;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .puces { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .puce { font-size: .8rem; border: 1px solid var(--trait); border-radius: 999px; padding: 1px 9px; color: var(--doux); }
-  .puce.fort { border-color: var(--accent); color: var(--accent); }
-  .droite { text-align: right; font-size: .85rem; color: var(--doux); white-space: nowrap; }
-  .droite .jours { display: block; font: 800 1.5rem/1 var(--titre); color: var(--encre); }
-  li.cloturee h2, li.cloturee .jours { color: var(--vieux); text-decoration: line-through; }
-  .vide { padding: 40px 0; color: var(--doux); }
-  details.rapport { margin-top: 30px; color: var(--doux); font-size: .85rem; }
-  details.rapport pre { white-space: pre-wrap; overflow-x: auto; }
-  @media (max-width: 600px) {
-    li.offre { grid-template-columns: 5px 1fr; }
-    .droite { grid-column: 2; text-align: left; margin-top: 8px; }
-    .droite .jours { display: inline; font-size: 1rem; margin-right: 6px; }
-  }
+  .puce { font-size: .8rem; border: 1px solid var(--trait); border-radius: 999px; padding: 1px 9px; color: var(--doux); background: var(--surface); }
+  .puce.fort { border-color: var(--accent); color: var(--accent); background: var(--accent-clair); }
+  li.cloturee h3 a { color: var(--vieux); text-decoration: line-through; }
+  .vide { padding: 36px 0; color: var(--doux); }
+  .plus { display: block; margin: 18px auto 0; padding: 9px 18px; border: 1px solid var(--trait); background: var(--surface); border-radius: 8px; cursor: pointer; }
+
+  /* Tableau de bord */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; color: inherit; }
+  .kpi:hover { border-color: var(--accent); }
+  .kpi b { display: block; font: 800 2rem/1 var(--titre); margin-bottom: 6px; }
+  .kpi span { color: var(--doux); font-size: .9rem; }
+  .graphes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .graphe { background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 16px; }
+  .graphe.large { grid-column: 1 / -1; }
+  .graphe h3 { font-size: 1.02rem; margin-bottom: 2px; }
+  .graphe p { color: var(--doux); font-size: .86rem; margin: 0 0 10px; }
+  .toile { position: relative; height: 240px; }
+  .graphe.large .toile { height: 260px; }
+  @media (max-width: 760px) { .graphes { grid-template-columns: 1fr; } }
+
+  /* Tableaux */
+  .tableau { overflow-x: auto; background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: .94rem; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--trait); white-space: nowrap; }
+  th { color: var(--doux); font-weight: 700; background: var(--fond); }
+  td.num, th.num { text-align: right; }
+  tr:last-child td { border-bottom: 0; }
+  .ok { color: var(--frais); font-weight: 700; } .ko { color: var(--vieux); } .err { color: var(--alerte); }
+  .encadre { background: var(--accent-clair); border-radius: 10px; padding: 14px 16px; margin: 0 0 16px; max-width: 80ch; }
+  .encadre.erreur { background: #fdecea; }
+  pre.rapport { white-space: pre-wrap; background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; padding: 14px; font-size: .88rem; overflow-x: auto; }
+  dl.sources { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; max-width: 80ch; }
+  dl.sources dt { font-weight: 700; } dl.sources dd { margin: 0; color: var(--doux); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 <header>
-  <h1>Offres en télétravail, en français</h1>
-  <p class="etat" id="etat">Chargement des offres…</p>
+  <div class="conteneur">
+    <h1>Télétravail en français</h1>
+    <p class="etat" id="etat">Chargement des données…</p>
+    <nav role="tablist" aria-label="Rubriques">
+      <button role="tab" id="t-offres" aria-controls="p-offres" data-onglet="offres">Offres<span class="nb" id="nb-offres"></span></button>
+      <button role="tab" id="t-apercu" aria-controls="p-apercu" data-onglet="apercu">En un coup d'œil</button>
+      <button role="tab" id="t-carrieres" aria-controls="p-carrieres" data-onglet="carrieres">Pages carrières<span class="nb" id="nb-carrieres"></span></button>
+      <button role="tab" id="t-evenements" aria-controls="p-evenements" data-onglet="evenements">Événements<span class="nb" id="nb-evenements"></span></button>
+      <button role="tab" id="t-sources" aria-controls="p-sources" data-onglet="sources">Sources</button>
+    </nav>
+  </div>
 </header>
 
-<div class="filtres">
-  <div class="filtres-in">
-    <input type="search" id="q" placeholder="Métier, entreprise, compétence…" aria-label="Rechercher">
-    <select id="source" aria-label="Source"><option value="">Toutes les sources</option></select>
-    <select id="zone" aria-label="Zone">
-      <option value="">Toutes les zones</option>
-      <option value="francophone">Pays francophones</option>
-      <option value="europe_monde">Europe ou monde</option>
-    </select>
-    <label class="case"><input type="checkbox" id="fr"> Annonce en français</label>
-    <label class="case"><input type="checkbox" id="total"> 100 % télétravail</label>
-    <label class="case"><input type="checkbox" id="closes"> Afficher les clôturées</label>
-  </div>
-</div>
+<main class="conteneur">
+  <!-- OFFRES -->
+  <section role="tabpanel" id="p-offres" aria-labelledby="t-offres">
+    <div class="filtres">
+      <input type="search" id="f-q" placeholder="Métier, entreprise, compétence…" aria-label="Rechercher">
+      <select id="f-source" aria-label="Source"><option value="">Toutes les sources</option></select>
+      <select id="f-pays" aria-label="Pays"><option value="">Tous les pays</option></select>
+      <select id="f-langue" aria-label="Langue">
+        <option value="">Toutes les langues</option>
+        <option value="fr_ou_demande">Français (annonce ou exigé)</option>
+        <option value="fr">Annonce en français</option>
+        <option value="demande">Français exigé dans l'annonce</option>
+      </select>
+      <select id="f-age" aria-label="Ancienneté">
+        <option value="">Toutes les dates</option>
+        <option value="0-0">Aujourd'hui</option>
+        <option value="0-3">3 derniers jours</option>
+        <option value="0-7">7 derniers jours</option>
+        <option value="0-30">30 derniers jours</option>
+        <option value="31-99999">Plus de 30 jours</option>
+      </select>
+      <label class="case"><input type="checkbox" id="f-total"> 100 % télétravail</label>
+      <label class="case"><input type="checkbox" id="f-closes"> Clôturées</label>
+      <button class="lien-bouton" id="f-reset" type="button">Effacer les filtres</button>
+    </div>
+    <div class="barre-infos">
+      <span id="compte" aria-live="polite"></span>
+      <span class="legende" aria-label="Couleur de la barre">
+        <span style="--c: var(--frais)">3 jours ou moins</span>
+        <span style="--c: var(--tiede)">jusqu'à 30 jours</span>
+        <span style="--c: var(--vieux)">plus de 30 jours</span>
+      </span>
+    </div>
+    <ol class="liste" id="liste"></ol>
+    <button class="plus" id="plus" type="button" hidden>Afficher plus d'offres</button>
+  </section>
 
-<main>
-  <p class="compte" id="compte" aria-live="polite"></p>
-  <ol id="liste"></ol>
-  <details class="rapport"><summary>Détail de la dernière collecte</summary><pre id="rapport"></pre></details>
+  <!-- APERÇU -->
+  <section role="tabpanel" id="p-apercu" aria-labelledby="t-apercu" hidden>
+    <p class="aide">Clique sur un chiffre ou sur une barre pour ouvrir les offres correspondantes.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="graphes">
+      <div class="graphe large"><h3>Évolution</h3><p>Offres actives chaque jour, avec les nouvelles et les clôturées.</p><div class="toile"><canvas id="g-evolution"></canvas></div></div>
+      <div class="graphe"><h3>Par source</h3><p>D'où viennent les offres actives.</p><div class="toile"><canvas id="g-source"></canvas></div></div>
+      <div class="graphe"><h3>Par pays</h3><p>Pays ou zone où l'on peut travailler.</p><div class="toile"><canvas id="g-pays"></canvas></div></div>
+      <div class="graphe"><h3>Place du français</h3><p>Langue de l'annonce et exigence de français.</p><div class="toile"><canvas id="g-langue"></canvas></div></div>
+      <div class="graphe"><h3>Ancienneté</h3><p>Depuis la publication, ou depuis la première détection.</p><div class="toile"><canvas id="g-age"></canvas></div></div>
+      <div class="graphe"><h3>Entreprises qui publient le plus</h3><p>Les 10 premières parmi les offres actives.</p><div class="toile"><canvas id="g-entreprises"></canvas></div></div>
+      <div class="graphe"><h3>Type de télétravail</h3><p>Entièrement à distance, ou partiel et non précisé.</p><div class="toile"><canvas id="g-remote"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- PAGES CARRIÈRES -->
+  <section role="tabpanel" id="p-carrieres" aria-labelledby="t-carrieres" hidden>
+    <h2 class="section">Pages carrières connectées</h2>
+    <p class="aide">Chaque identifiant de <code>companies.json</code> est testé automatiquement sur Lever, Greenhouse, Ashby, Recruitee, Workable et SmartRecruiters. Les identifiants non trouvés sont retestés chaque semaine.</p>
+    <div class="filtres" style="margin-bottom:14px">
+      <label class="case"><input type="checkbox" id="c-connectees" checked> Seulement les entreprises connectées</label>
+    </div>
+    <div class="tableau"><table>
+      <thead><tr><th>Entreprise</th><th>Outil de recrutement</th><th class="num">Offres publiées</th><th class="num">Retenues</th><th>Page carrière</th></tr></thead>
+      <tbody id="c-lignes"></tbody>
+    </table></div>
+  </section>
+
+  <!-- ÉVÉNEMENTS -->
+  <section role="tabpanel" id="p-evenements" aria-labelledby="t-evenements" hidden>
+    <h2 class="section">Événements emploi</h2>
+    <p class="aide">Salons, job datings et réunions d'information publiés par France Travail et ses partenaires.</p>
+    <div id="e-message"></div>
+    <div id="e-contenu" hidden>
+      <div class="graphes" style="margin-bottom:16px">
+        <div class="graphe"><h3>Par type</h3><p>Clique sur une barre pour filtrer.</p><div class="toile"><canvas id="g-evt-type"></canvas></div></div>
+        <div class="graphe"><h3>En ligne ou sur place</h3><p>Les événements en ligne se suivent depuis chez soi.</p><div class="toile"><canvas id="g-evt-mode"></canvas></div></div>
+      </div>
+      <div class="filtres" style="margin-bottom:6px">
+        <input type="search" id="e-q" placeholder="Métier, ville, organisateur…" aria-label="Rechercher un événement">
+        <select id="e-type" aria-label="Type"><option value="">Tous les types</option></select>
+        <label class="case"><input type="checkbox" id="e-ligne"> En ligne seulement</label>
+      </div>
+      <ol class="liste" id="e-liste"></ol>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section role="tabpanel" id="p-sources" aria-labelledby="t-sources" hidden>
+    <h2 class="section">Dernière collecte</h2>
+    <pre class="rapport" id="rapport">Rien à afficher.</pre>
+    <h2 class="section" style="margin-top:28px">Sources utilisées</h2>
+    <dl class="sources">
+      <dt>France Travail</dt><dd>API officielle Offres d'emploi, recherche « télétravail ». Lien vers la fiche France Travail.</dd>
+      <dt>Le Forem</dt><dd>Open data officiel de l'office wallon de l'emploi (Belgique), publié sur ODWB.</dd>
+      <dt>Remotive</dt><dd>API publique. Lien vers l'offre sur Remotive et mention de la source obligatoires.</dd>
+      <dt>Jobicy</dt><dd>API publique filtrée par pays (France, Belgique, Suisse, Canada, Europe). Lien Jobicy conservé.</dd>
+      <dt>Pages carrières</dt><dd>Flux publics des outils de recrutement des entreprises (Lever, Greenhouse, Ashby, Recruitee, Workable, SmartRecruiters).</dd>
+    </dl>
+  </section>
 </main>
 
 <script>
 const $ = (id) => document.getElementById(id);
 const JOUR = 86400000;
-let offres = [];
+const COULEURS = ["#2447b8", "#1f9d6b", "#d08a16", "#7a4fd1", "#0e8a9a", "#c8456b", "#5b6578", "#8fa3e8", "#6cc49e", "#e8b766"];
+const etat = { offres: [], historique: [], entreprises: [], evenements: null, graphes: {}, limite: 60 };
 
-const jours = (iso) => iso ? Math.max(0, Math.floor((Date.now() - new Date(iso)) / JOUR)) : null;
 const echap = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const sansAccent = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-const lienSur = (u) => /^https?:\/\//i.test(u) ? u : "#";
+const lienSur = (u) => /^https?:\/\//i.test(u || "") ? u : "#";
+const pluriel = (n, un, plusieurs) => `${n.toLocaleString("fr-FR")} ${n > 1 ? plusieurs : un}`;
 
-function rendu() {
-  const q = sansAccent($("q").value.trim());
-  const filtre = offres.filter((o) =>
-    (o.statut === "active" || $("closes").checked) &&
-    (!$("source").value || o.source === $("source").value) &&
-    (!$("zone").value || o.zone === $("zone").value) &&
-    (!$("fr").checked || o.langue === "fr") &&
-    (!$("total").checked || o.remote_total) &&
-    (!q || sansAccent(`${o.titre} ${o.entreprise} ${o.lieu} ${o.description}`).includes(q))
-  );
+function joursDepuis(o) {
+  const ref = o.publiee_le && !isNaN(new Date(o.publiee_le)) ? o.publiee_le : o.vue_premiere_fois;
+  return ref ? Math.max(0, Math.floor((Date.now() - new Date(ref)) / JOUR)) : 0;
+}
+function phraseAge(o) {
+  const j = joursDepuis(o);
+  const verbe = o.publiee_le ? "Publiée" : "Repérée";
+  return j === 0 ? `${verbe} aujourd'hui` : j === 1 ? `${verbe} hier` : `${verbe} il y a ${j} jours`;
+}
+const paysDe = (o) => o.pays || [o.zone === "francophone" ? "Pays francophone" : o.zone === "europe_monde" ? "Europe ou monde" : "Autre"];
+const actives = () => etat.offres.filter((o) => o.statut === "active");
 
-  const actives = filtre.filter((o) => o.statut === "active").length;
-  $("compte").textContent = `${actives} offre${actives > 1 ? "s" : ""} active${actives > 1 ? "s" : ""}` +
-    (filtre.length > actives ? `, ${filtre.length - actives} clôturée(s)` : "");
+/* ---------- Onglets ---------- */
+function ouvrir(onglet) {
+  document.querySelectorAll("[role=tab]").forEach((b) => b.setAttribute("aria-selected", b.dataset.onglet === onglet));
+  document.querySelectorAll("[role=tabpanel]").forEach((p) => (p.hidden = p.id !== `p-${onglet}`));
+  if (location.hash.slice(1) !== onglet) history.replaceState(null, "", `#${onglet}`);
+  if (onglet === "apercu") dessinerApercu();
+  if (onglet === "evenements") dessinerEvenements();
+}
+document.querySelectorAll("[role=tab]").forEach((b) => b.addEventListener("click", () => ouvrir(b.dataset.onglet)));
 
-  if (!filtre.length) {
+/* ---------- Offres ---------- */
+const FILTRES = ["f-q", "f-source", "f-pays", "f-langue", "f-age", "f-total", "f-closes"];
+function offresFiltrees() {
+  const q = sansAccent($("f-q").value.trim());
+  const [min, max] = ($("f-age").value || "0-99999").split("-").map(Number);
+  const lg = $("f-langue").value;
+  return etat.offres.filter((o) => {
+    const j = joursDepuis(o);
+    return (o.statut === "active" || $("f-closes").checked) &&
+      (!$("f-source").value || o.source === $("f-source").value) &&
+      (!$("f-pays").value || paysDe(o).includes($("f-pays").value)) &&
+      (!lg || (lg === "fr" && o.langue === "fr") || (lg === "demande" && o.francais_demande) ||
+        (lg === "fr_ou_demande" && (o.langue === "fr" || o.francais_demande))) &&
+      (!$("f-total").checked || o.remote_total) &&
+      j >= min && j <= max &&
+      (!q || sansAccent(`${o.titre} ${o.entreprise} ${o.lieu} ${o.description}`).includes(q));
+  }).sort((a, b) => (a.statut === "cloturee") - (b.statut === "cloturee") || joursDepuis(a) - joursDepuis(b));
+}
+
+function dessinerOffres() {
+  const liste = offresFiltrees();
+  const nbActives = liste.filter((o) => o.statut === "active").length;
+  $("compte").textContent = `${pluriel(nbActives, "offre active", "offres actives")}${liste.length > nbActives ? `, ${pluriel(liste.length - nbActives, "clôturée", "clôturées")}` : ""}`;
+  if (!liste.length) {
     $("liste").innerHTML = `<li class="vide">Aucune offre ne correspond. Retire un filtre ou élargis la recherche.</li>`;
+    $("plus").hidden = true;
     return;
   }
-
-  $("liste").innerHTML = filtre.slice(0, 400).map((o) => {
-    const ouverte = jours(o.vue_premiere_fois);
-    const classeAge = o.statut === "cloturee" ? "" : ouverte <= 3 ? "frais" : ouverte <= 30 ? "tiede" : "";
+  $("liste").innerHTML = liste.slice(0, etat.limite).map((o) => {
+    const j = joursDepuis(o);
+    const couleur = o.statut === "cloturee" ? "" : j <= 3 ? "frais" : j <= 30 ? "tiede" : "";
     const puces = [
       o.remote_total && `<span class="puce fort">100 % télétravail</span>`,
       o.langue === "fr" && `<span class="puce">Annonce en français</span>`,
+      o.francais_demande && o.langue !== "fr" && `<span class="puce fort">Français exigé</span>`,
       o.contrat && `<span class="puce">${echap(o.contrat)}</span>`,
       o.statut === "cloturee" && `<span class="puce">Clôturée</span>`,
     ].filter(Boolean).join("");
     return `<li class="offre ${o.statut === "cloturee" ? "cloturee" : ""}">
-      <span class="age ${classeAge}" title="Suivie depuis ${ouverte} jour(s)"></span>
+      <span class="age ${couleur}" aria-hidden="true"></span>
       <div>
-        <h2><a href="${echap(lienSur(o.lien))}" target="_blank" rel="noopener noreferrer">${echap(o.titre)}</a></h2>
-        <div class="meta"><strong>${echap(o.entreprise)}</strong><span>${echap(o.lieu || "Lieu non précisé")}</span><span>Source : ${echap(o.source)}</span></div>
+        <h3><a href="${echap(lienSur(o.lien))}" target="_blank" rel="noopener noreferrer">${echap(o.titre)}</a></h3>
+        <div class="meta"><strong>${echap(o.entreprise)}</strong><span>${echap(o.lieu || "Lieu non précisé")}</span><span>${phraseAge(o)}</span><span>Source : ${echap(o.source)}</span></div>
         ${o.description ? `<p class="desc">${echap(o.description)}</p>` : ""}
         ${puces ? `<div class="puces">${puces}</div>` : ""}
-      </div>
-      <div class="droite"><span class="jours">${ouverte} j</span>suivie depuis</div>
-    </li>`;
+      </div></li>`;
   }).join("");
+  $("plus").hidden = liste.length <= etat.limite;
 }
 
-async function charger() {
-  try {
-    const r = await fetch(`data/jobs.json?v=${Date.now()}`);
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const data = await r.json();
-    offres = (data.offres || []).sort((a, b) => (a.statut === "cloturee") - (b.statut === "cloturee"));
-    $("etat").textContent = data.mise_a_jour
-      ? `Dernière collecte : ${new Date(data.mise_a_jour).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" })}. Chaque titre ouvre l'offre sur le site d'origine.`
-      : "Aucune collecte pour l'instant. Lance le workflow « Mise à jour des offres » dans l'onglet Actions du dépôt.";
-    $("rapport").textContent = (data.rapport || []).join("\n") || "Rien à afficher.";
-    [...new Set(offres.map((o) => o.source))].sort().forEach((s) => $("source").add(new Option(s, s)));
-    rendu();
-  } catch (e) {
-    $("etat").textContent = `Impossible de lire data/jobs.json (${e.message}). Vérifie que le fichier existe dans le dépôt.`;
+function appliquerFiltre(valeurs) {
+  $("f-q").value = ""; $("f-source").value = ""; $("f-pays").value = ""; $("f-langue").value = "";
+  $("f-age").value = ""; $("f-total").checked = false; $("f-closes").checked = false;
+  Object.entries(valeurs).forEach(([id, v]) => {
+    const el = $(id);
+    if (el.type === "checkbox") el.checked = v;
+    else {
+      if (el.tagName === "SELECT" && ![...el.options].some((op) => op.value === v)) el.add(new Option(v, v));
+      el.value = v;
+    }
+  });
+  etat.limite = 60;
+  dessinerOffres();
+  ouvrir("offres");
+  window.scrollTo({ top: 0 });
+}
+
+FILTRES.forEach((id) => $(id).addEventListener("input", () => { etat.limite = 60; dessinerOffres(); }));
+$("f-reset").addEventListener("click", () => appliquerFiltre({}));
+$("plus").addEventListener("click", () => { etat.limite += 60; dessinerOffres(); });
+
+/* ---------- Graphiques ---------- */
+if (window.Chart) {
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  Chart.defaults.color = "#5b6578";
+  Chart.defaults.borderColor = "#e2e6ec";
+  Chart.defaults.plugins.legend.labels.boxWidth = 12;
+}
+
+function graphe(id, config, auClic) {
+  if (!window.Chart) {
+    $(id).parentElement.innerHTML = `<p class="vide">Les graphiques n'ont pas pu se charger. Vérifie ta connexion puis recharge la page.</p>`;
+    return;
   }
+  etat.graphes[id]?.destroy();
+  const g = new Chart($(id), { ...config, options: { responsive: true, maintainAspectRatio: false, ...config.options } });
+  if (auClic) {
+    $(id).style.cursor = "pointer";
+    $(id).onclick = (ev) => {
+      const el = g.getElementsAtEventForMode(ev, "nearest", { intersect: true }, true)[0];
+      if (el) auClic(g.data.labels[el.index], el.datasetIndex);
+    };
+  }
+  etat.graphes[id] = g;
 }
 
-["q", "source", "zone", "fr", "total", "closes"].forEach((id) => $(id).addEventListener("input", rendu));
-charger();
+function compter(liste, cle) {
+  const m = new Map();
+  liste.forEach((o) => [].concat(cle(o)).forEach((k) => m.set(k, (m.get(k) || 0) + 1)));
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+
+function barres(id, paires, auClic, couleur = COULEURS[0]) {
+  graphe(id, {
+    type: "bar",
+    data: { labels: paires.map((p) => p[0]), datasets: [{ data: paires.map((p) => p[1]), backgroundColor: couleur, borderRadius: 4, maxBarThickness: 26 }] },
+    options: { indexAxis: "y", plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0 } }, y: { grid: { display: false } } } },
+  }, auClic);
+}
+
+function anneau(id, paires, auClic) {
+  graphe(id, {
+    type: "doughnut",
+    data: { labels: paires.map((p) => p[0]), datasets: [{ data: paires.map((p) => p[1]), backgroundColor: COULEURS, borderColor: "#fff", borderWidth: 2 }] },
+    options: { cutout: "58%", plugins: { legend: { position: "right" } } },
+  }, auClic);
+}
+
+function dessinerApercu() {
+  const act = actives();
+  const nouvelles = (n) => act.filter((o) => (Date.now() - new Date(o.vue_premiere_fois)) / JOUR <= n).length;
+  const clot7 = etat.offres.filter((o) => o.statut === "cloturee" && (Date.now() - new Date(o.cloturee_le)) / JOUR <= 7).length;
+  const francais = act.filter((o) => o.langue === "fr" || o.francais_demande).length;
+  const kpis = [
+    [act.length, "offres actives", {}],
+    [nouvelles(1), "repérées depuis 24 h", { "f-age": "0-0" }],
+    [nouvelles(7), "repérées en 7 jours", { "f-age": "0-7" }],
+    [act.length ? `${Math.round((francais / act.length) * 100)} %` : "0 %", "en français ou français exigé", { "f-langue": "fr_ou_demande" }],
+    [act.filter((o) => o.remote_total).length, "100 % télétravail", { "f-total": true }],
+    [clot7, "clôturées en 7 jours", { "f-closes": true }],
+  ];
+  $("kpis").innerHTML = kpis.map(([n, l], i) => `<button class="kpi" type="button" data-i="${i}"><b>${typeof n === "number" ? n.toLocaleString("fr-FR") : n}</b><span>${l}</span></button>`).join("");
+  $("kpis").querySelectorAll(".kpi").forEach((b) => b.addEventListener("click", () => appliquerFiltre(kpis[b.dataset.i][2])));
+
+  const h = etat.historique.slice(-60);
+  graphe("g-evolution", {
+    data: {
+      labels: h.map((p) => new Date(p.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })),
+      datasets: [
+        { type: "line", label: "Actives", data: h.map((p) => p.actives), borderColor: COULEURS[0], backgroundColor: COULEURS[0], tension: 0.25, yAxisID: "y", pointRadius: h.length > 20 ? 0 : 3 },
+        { type: "bar", label: "Nouvelles", data: h.map((p) => p.nouvelles), backgroundColor: COULEURS[1], yAxisID: "y2", maxBarThickness: 14 },
+        { type: "bar", label: "Clôturées", data: h.map((p) => p.cloturees), backgroundColor: COULEURS[2], yAxisID: "y2", maxBarThickness: 14 },
+      ],
+    },
+    options: {
+      interaction: { mode: "index", intersect: false },
+      scales: { y: { beginAtZero: true, title: { display: true, text: "Actives" } }, y2: { beginAtZero: true, position: "right", grid: { display: false }, title: { display: true, text: "Par jour" } }, x: { grid: { display: false } } },
+    },
+  });
+  if (h.length < 2) $("g-evolution").closest(".graphe").querySelector("p").textContent = "La courbe se remplira au fil des jours : il faut au moins deux jours de collecte.";
+
+  barres("g-source", compter(act, (o) => o.source), (l) => appliquerFiltre({ "f-source": l }));
+  barres("g-pays", compter(act, paysDe), (l) => appliquerFiltre({ "f-pays": l }), COULEURS[4]);
+
+  const lg = [
+    ["Annonce en français", act.filter((o) => o.langue === "fr").length, { "f-langue": "fr" }],
+    ["Autre langue, français exigé", act.filter((o) => o.langue !== "fr" && o.francais_demande).length, { "f-langue": "demande" }],
+    ["Autre langue", act.filter((o) => o.langue !== "fr" && !o.francais_demande).length, {}],
+  ];
+  anneau("g-langue", lg.map(([a, b]) => [a, b]), (l) => appliquerFiltre(lg.find((x) => x[0] === l)[2]));
+
+  const tranches = [["Aujourd'hui", 0, 0, "0-0"], ["1 à 3 j", 1, 3, "0-3"], ["4 à 7 j", 4, 7, "0-7"], ["8 à 30 j", 8, 30, "0-30"], ["Plus de 30 j", 31, 99999, "31-99999"]];
+  graphe("g-age", {
+    type: "bar",
+    data: { labels: tranches.map((t) => t[0]), datasets: [{ data: tranches.map(([, a, b]) => act.filter((o) => { const j = joursDepuis(o); return j >= a && j <= b; }).length), backgroundColor: ["#1f9d6b", "#1f9d6b", "#d08a16", "#d08a16", "#a3abb8"], borderRadius: 4, maxBarThickness: 40 }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { grid: { display: false } } } },
+  }, (l) => appliquerFiltre({ "f-age": tranches.find((t) => t[0] === l)[3] }));
+
+  barres("g-entreprises", compter(act, (o) => o.entreprise).slice(0, 10), (l) => appliquerFiltre({ "f-q": l }), COULEURS[3]);
+  anneau("g-remote", [["100 % télétravail", act.filter((o) => o.remote_total).length], ["Partiel ou non précisé", act.filter((o) => !o.remote_total).length]],
+    (l) => l.startsWith("100") && appliquerFiltre({ "f-total": true }));
+}
+
+/* ---------- Pages carrières ---------- */
+const URL_ATS = {
+  lever: (s) => `https://jobs.lever.co/${s}`, greenhouse: (s) => `https://job-boards.greenhouse.io/${s}`,
+  ashby: (s) => `https://jobs.ashbyhq.com/${s}`, recruitee: (s) => `https://${s}.recruitee.com`,
+  workable: (s) => `https://apply.workable.com/${s}`, smartrecruiters: (s) => `https://jobs.smartrecruiters.com/${s}`,
+};
+const NOM_ATS = { lever: "Lever", greenhouse: "Greenhouse", ashby: "Ashby", recruitee: "Recruitee", workable: "Workable", smartrecruiters: "SmartRecruiters" };
+
+function dessinerCarrieres() {
+  const toutes = etat.entreprises;
+  const liste = $("c-connectees").checked ? toutes.filter((e) => e.ats) : toutes;
+  $("nb-carrieres").textContent = toutes.length ? `${toutes.filter((e) => e.ats).length}/${toutes.length}` : "";
+  $("c-lignes").innerHTML = liste.length ? liste.map((e) => `<tr>
+      <td><strong>${echap(e.nom || e.slug)}</strong>${e.nom && e.nom !== e.slug ? ` <span class="ko">(${echap(e.slug)})</span>` : ""}</td>
+      <td>${e.ats ? `<span class="ok">${NOM_ATS[e.ats]}</span>` : e.erreur ? `<span class="err" title="${echap(e.erreur)}">Erreur</span>` : `<span class="ko">Non trouvée</span>`}</td>
+      <td class="num">${e.offres_total ?? 0}</td>
+      <td class="num">${e.offres_retenues ? `<button class="lien-bouton" type="button" data-slug="${echap(e.nom || e.slug)}">${e.offres_retenues}</button>` : 0}</td>
+      <td>${e.ats ? `<a href="${echap(URL_ATS[e.ats](e.slug))}" target="_blank" rel="noopener noreferrer">Ouvrir</a>` : ""}</td>
+    </tr>`).join("") : `<tr><td colspan="5" class="vide">Aucune entreprise pour l'instant. Lance le workflow pour démarrer la détection.</td></tr>`;
+  $("c-lignes").querySelectorAll("button[data-slug]").forEach((b) => b.addEventListener("click", () => appliquerFiltre({ "f-q": b.dataset.slug })));
+}
+$("c-connectees").addEventListener("input", dessinerCarrieres);
+
+/* ---------- Événements ---------- */
+function evenementsFiltres() {
+  const q = sansAccent($("e-q").value.trim());
+  return (etat.evenements?.evenements || []).filter((e) =>
+    (!$("e-type").value || e.type === $("e-type").value) && (!$("e-ligne").checked || e.en_ligne) &&
+    (!q || sansAccent(`${e.titre} ${e.lieu} ${e.organisateur} ${e.description}`).includes(q)));
+}
+
+function dessinerEvenements() {
+  const d = etat.evenements;
+  const tous = d?.evenements || [];
+  if (!d || d.statut !== "ok") {
+    $("e-message").innerHTML = `<div class="encadre ${d?.statut === "erreur" ? "erreur" : ""}">
+      <strong>${d?.statut === "erreur" ? "La collecte des événements a échoué." : "Événements non connectés."}</strong><br>
+      ${echap(d?.message || "Lance le workflow pour récupérer les événements.")}</div>`;
+    $("e-contenu").hidden = true;
+    return;
+  }
+  $("e-message").innerHTML = "";
+  $("e-contenu").hidden = false;
+  barres("g-evt-type", compter(tous, (e) => e.type), (l) => { $("e-type").value = l; listeEvenements(); }, COULEURS[3]);
+  anneau("g-evt-mode", [["En ligne", tous.filter((e) => e.en_ligne).length], ["Sur place", tous.filter((e) => !e.en_ligne).length]],
+    (l) => { $("e-ligne").checked = l === "En ligne"; listeEvenements(); });
+  listeEvenements();
+}
+
+function listeEvenements() {
+  const liste = evenementsFiltres();
+  const date = (s) => s ? new Date(s).toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "long" }) : "";
+  $("e-liste").innerHTML = liste.length ? liste.slice(0, 200).map((e) => `<li class="offre">
+    <span class="age ${e.en_ligne ? "frais" : ""}" aria-hidden="true"></span>
+    <div>
+      <h3><a href="${echap(lienSur(e.lien))}" target="_blank" rel="noopener noreferrer">${echap(e.titre)}</a></h3>
+      <div class="meta"><strong>${echap(date(e.debut))}</strong><span>${echap(e.type)}</span><span>${echap(e.lieu)}</span>${e.organisateur ? `<span>${echap(e.organisateur)}</span>` : ""}</div>
+      <div class="puces">${e.en_ligne ? `<span class="puce fort">En ligne</span>` : `<span class="puce">Sur place</span>`}${e.offres ? `<span class="puce">${e.offres} offres</span>` : ""}</div>
+    </div></li>`).join("") : `<li class="vide">Aucun événement ne correspond à ces filtres.</li>`;
+}
+["e-q", "e-type", "e-ligne"].forEach((id) => $(id).addEventListener("input", listeEvenements));
+
+/* ---------- Chargement ---------- */
+async function lire(fichier, defaut) {
+  try {
+    const r = await fetch(`data/${fichier}?v=${Date.now()}`);
+    return r.ok ? await r.json() : defaut;
+  } catch { return defaut; }
+}
+
+(async function demarrer() {
+  const [jobs, historique, entreprises, evenements] = await Promise.all([
+    lire("jobs.json", null), lire("historique.json", []), lire("entreprises.json", { entreprises: [] }), lire("evenements.json", null),
+  ]);
+  if (!jobs) {
+    $("etat").textContent = "Impossible de lire data/jobs.json. Vérifie que le fichier existe dans le dépôt.";
+  } else {
+    etat.offres = jobs.offres || [];
+    $("etat").textContent = jobs.mise_a_jour
+      ? `Dernière collecte : ${new Date(jobs.mise_a_jour).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" })}. Chaque titre ouvre l'annonce sur le site d'origine.`
+      : "Aucune collecte pour l'instant. Lance le workflow « Mise à jour des offres » dans l'onglet Actions du dépôt.";
+    $("rapport").textContent = (jobs.rapport || []).join("\n") || "Rien à afficher.";
+  }
+  etat.historique = historique;
+  etat.entreprises = entreprises.entreprises || [];
+  etat.evenements = evenements;
+
+  const act = actives();
+  $("nb-offres").textContent = act.length ? act.length.toLocaleString("fr-FR") : "";
+  $("nb-evenements").textContent = evenements?.evenements?.length || "";
+  compter(etat.offres, (o) => o.source).map((p) => p[0]).sort().forEach((s) => $("f-source").add(new Option(s, s)));
+  compter(etat.offres, paysDe).map((p) => p[0]).sort((a, b) => a.localeCompare(b, "fr")).forEach((p) => $("f-pays").add(new Option(p, p)));
+  compter(evenements?.evenements || [], (e) => e.type).map((p) => p[0]).sort().forEach((t) => $("e-type").add(new Option(t, t)));
+
+  dessinerOffres();
+  dessinerCarrieres();
+  const demande = location.hash.slice(1);
+  ouvrir(["offres", "apercu", "carrieres", "evenements", "sources"].includes(demande) ? demande : "offres");
+})();
 </script>
 </body>
 </html>
