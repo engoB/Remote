@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://engob.github.io/Remote/"><img alt="Essayer" src="https://img.shields.io/badge/Essayer-Voir_les_offres-0b0b0f?style=for-the-badge&labelColor=0b0b0f"></a>
-  <a href="https://engob.github.io/portofolio/projets/teletravail/"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-Senshi_Kabai-4f46e5?style=for-the-badge&labelColor=0b0b0f"></a>
+  <a href="https://www.senshicore.com/projets/teletravail/"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-Senshi_Kabai-4f46e5?style=for-the-badge&labelColor=0b0b0f"></a>
 </p>
 
 <h1 align="center">Télétravail en français</h1>
@@ -41,7 +41,7 @@ Remote jobs are scattered across job boards, career pages and foreign platforms 
 
 ---
 
-<p align="center"><sub>Conçu, développé et mis en ligne par <b>Senshi Kabai</b>, Product Builder · <a href="https://engob.github.io/portofolio/">portfolio</a> · <a href="https://engob.github.io/portofolio/projets/teletravail/">fiche du projet</a><br>© 2026 Senshi Kabai — tous droits réservés.</sub></p>
+<p align="center"><sub>Conçu, développé et mis en ligne par <b>Senshi Kabai</b>, Product Builder · <a href="https://www.senshicore.com/">portfolio</a> · <a href="https://www.senshicore.com/projets/teletravail/">fiche du projet</a><br>© 2026 Senshi Kabai — tous droits réservés.</sub></p>
 
 
 <details>
